@@ -16,7 +16,8 @@ public class Movement : MonoBehaviour
     float _steer;
     
     float _thrust;
-   
+    Vector3 _directVector;
+    Vector3 _directRotation;
 
     [SerializeField] float _thrustMultiplier = 50.0f;
     [SerializeField] float _steerSensitivity = 1f;
@@ -57,22 +58,16 @@ public class Movement : MonoBehaviour
 
         if (_thrust > 0)
         {
-            _rb.AddRelativeForce(new Vector3(0, _thrust * _thrustMultiplier, 0));
+            _rb.AddRelativeForce(_directVector = new Vector3(0, _thrust * _thrustMultiplier, 0));
+            _rb.AddRelativeTorque(_directRotation = new Vector3(0, 0, _steer * (-_steerSensitivity)));
             ActivateParticles();
         }
 
-        else if (_steer > 0)
+        else if (_steer != 0)
         {
-            _rb.AddRelativeTorque(new Vector3(0, 0, _steer * (-_steerSensitivity)));
-        
+            _rb.AddRelativeForce(_directVector = new Vector3(0, _thrust * _thrustMultiplier, 0));
+            _rb.AddRelativeTorque(_directRotation = new Vector3(0, 0, _steer * (-_steerSensitivity)));
         }
-
-        else if (_steer < 0)
-        {
-            _rb.AddRelativeTorque(new Vector3(0, 0, _steer * (-_steerSensitivity)));
-
-        }
-
 
         else
         {
