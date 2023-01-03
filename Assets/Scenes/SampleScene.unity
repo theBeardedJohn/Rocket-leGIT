@@ -523,6 +523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1332515307}
   - {fileID: 1095769287}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -543,7 +544,8 @@ MonoBehaviour:
   _particle2: {fileID: 6434268379086236452}
   _particle4: {fileID: 2424608653694679722}
   _particle3: {fileID: 6434268378817776942}
-  _thrustMultiplier: 1.87
+  _thrustMultiplier: 2.43
+  _steerSensitivity: 2
 --- !u!54 &1075764785
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -609,8 +611,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332515306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: 0.01, z: 0.37}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6516738, y: -0.75, z: -6.229166}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -618,8 +620,8 @@ Transform:
   - {fileID: 2138633001303147322}
   - {fileID: 7296709749056443060}
   - {fileID: 2138633000497898800}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1075764783}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1479470650
 GameObject:
@@ -4704,7 +4706,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 0
     collisionMode: 0

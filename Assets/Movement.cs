@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.ParticleSystem;
 
 public class Movement : MonoBehaviour
@@ -13,13 +13,13 @@ public class Movement : MonoBehaviour
     public ParticleSystem _particle3;
 
     Rigidbody _rb;
-    //float _inHorizontal;
+    float _steer;
     
     float _thrust;
-    
+   
 
     [SerializeField] float _thrustMultiplier = 50.0f;
-    //[SerializeField] float _horizontalSensitivity = 1f;
+    [SerializeField] float _steerSensitivity = 1f;
 
 
     // Start is called before the first frame update
@@ -31,13 +31,13 @@ public class Movement : MonoBehaviour
 
     void ActivateParticles()
     {
+        if (!_particle.isPlaying)
+        { 
         _particle.Play();
         _particle2.Play();
         _particle3.Play();
         _particle4.Play();
-
-
-
+    }
     }
 
     void DeactivateParticles()
@@ -51,36 +51,29 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //_inHorizontal = Input.GetAxis("Horizontal");
+        _steer = Input.GetAxis("Horizontal");
         _thrust = Input.GetAxis("Vertical");
 
 
-        if (_thrust > 0 && !_particle.isPlaying)
+        if (_thrust > 0)
         {
             _rb.AddForce(new Vector3(0, _thrust * _thrustMultiplier, 0));
             ActivateParticles();
         }
-
-        else if (_thrust > 0 )
-        {
-            _rb.AddForce(new Vector3(0, _thrust * _thrustMultiplier, 0));
-           
-        }
-
-
-
-
-        else if (_thrust < 0)
-        {
-            
-            ActivateParticles();
-        }
-
-        else if (_thrust == 0 )
+        
+        
+       
+        else 
         {
             DeactivateParticles();
         }
         
+
+        //if (_steer > 0)
+       // {
+       //     transform.rotate(0, 3, 0);
+      //  }
+
 
         Debug.Log(_thrust);
 
