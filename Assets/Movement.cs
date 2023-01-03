@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+//using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.ParticleSystem;
 
 public class Movement : MonoBehaviour
@@ -57,13 +57,24 @@ public class Movement : MonoBehaviour
 
         if (_thrust > 0)
         {
-            _rb.AddForce(new Vector3(0, _thrust * _thrustMultiplier, 0));
+            _rb.AddRelativeForce(new Vector3(0, _thrust * _thrustMultiplier, 0));
             ActivateParticles();
         }
+
+        else if (_steer > 0)
+        {
+            _rb.AddRelativeTorque(new Vector3(0, 0, _steer * (-_steerSensitivity)));
         
-        
-       
-        else 
+        }
+
+        else if (_steer < 0)
+        {
+            _rb.AddRelativeTorque(new Vector3(0, 0, _steer * (-_steerSensitivity)));
+
+        }
+
+
+        else
         {
             DeactivateParticles();
         }
