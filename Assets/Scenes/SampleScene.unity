@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -220,7 +221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.927857, y: 7.5212636, z: -16.111742}
+  m_LocalPosition: {x: 0.19, y: 6.2, z: -24.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,6 +261,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a1249edba0a1849b86175752a33bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rocket: {fileID: 1075764783}
+  _cameraOffset: {x: 0.19, y: 6.2, z: -24.69}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,8 +559,8 @@ MonoBehaviour:
   _particle2: {fileID: 6434268379086236452}
   _particle4: {fileID: 2424608653694679722}
   _particle3: {fileID: 6434268378817776942}
-  _thrustMultiplier: 2.43
-  _steerSensitivity: 2
+  _thrustMultiplier: 1.42
+  _steerSensitivity: 1.24
 --- !u!54 &1075764785
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -557,7 +572,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

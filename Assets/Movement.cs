@@ -81,7 +81,7 @@ public class Movement : MonoBehaviour
       //  }
 
 
-        Debug.Log(_thrust);
+        //Debug.Log(_thrust);
 
     }
 
