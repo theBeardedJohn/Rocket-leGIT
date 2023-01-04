@@ -33,16 +33,16 @@ public class CameraTracking : MonoBehaviour
             yield return new WaitForEndOfFrame();
             // Calculate velocity: Velocity = DeltaPosition / DeltaTime
             _currVel = (_prevPos - transform.position);
-           // _currVel = _prevPos - transform.position;
+            // _currVel = _prevPos - transform.position;
+            
 
-           
         }
     }
 
     void Update()
     {
         
-        _speedZ = ((+_currVel.x)+(+_currVel.z)+(+_currVel.y)) * _speedZMultip;
+        _speedZ = (Mathf.Abs( _currVel.x)+ Mathf.Abs( _currVel.z)+ Mathf.Abs( _currVel.y)) * _speedZMultip;
         _zoomZ = Mathf.Clamp(_speedZ, -24f, -40f);
         _cameraOffsetZ = new Vector3 (0, 0, _zoomZ);
 ;
@@ -50,7 +50,7 @@ public class CameraTracking : MonoBehaviour
         
         transform.position = _rocket.position + _cameraOffMove;
 
-        Debug.Log(_speedZ);
+        Debug.Log("rychlost _speedz" + _speedZ);
 
     }
 }
