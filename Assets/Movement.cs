@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public ParticleSystem _particle2;
     public ParticleSystem _particle4;
     public ParticleSystem _particle3;
+    public ParticleSystem _particleR;
+    public ParticleSystem _particleL;
 
     Rigidbody _rb;
     float _steer;
@@ -30,6 +32,24 @@ public class Movement : MonoBehaviour
     
     }
 
+    void ActivateSteerParticlesR()
+    {
+        if (!_particleR.isPlaying)
+        {
+            _particleR.Play();
+            
+        }
+    }
+
+    void ActivateSteerParticlesL()
+    {
+        if (!_particleL.isPlaying)
+        {
+            _particleL.Play();
+
+        }
+    }
+
     void ActivateParticles()
     {
         if (!_particle.isPlaying)
@@ -47,6 +67,8 @@ public class Movement : MonoBehaviour
         _particle2.Stop();
         _particle3.Stop();
         _particle4.Stop();
+        _particleR.Stop();
+        _particleL.Stop();
     }
 
     // Update is called once per frame
@@ -63,11 +85,20 @@ public class Movement : MonoBehaviour
             ActivateParticles();
         }
 
-        else if (_steer != 0)
+        else if (_steer < 0)
         {
             _rb.AddRelativeForce(_directVector = new Vector3(0, _thrust * _thrustMultiplier, 0));
             _rb.AddRelativeTorque(_directRotation = new Vector3(0, 0, _steer * (-_steerSensitivity)));
+            ActivateSteerParticlesR();
         }
+        else if (_steer > 0)
+        {
+            _rb.AddRelativeForce(_directVector = new Vector3(0, _thrust * _thrustMultiplier, 0));
+            _rb.AddRelativeTorque(_directRotation = new Vector3(0, 0, _steer * (-_steerSensitivity)));
+            ActivateSteerParticlesL();
+        }
+
+
 
         else
         {
