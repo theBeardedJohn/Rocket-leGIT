@@ -14,6 +14,12 @@ public class Movement : MonoBehaviour
     public ParticleSystem _particleR;
     public ParticleSystem _particleL;
 
+
+    // *** PROMENNE DEFINOVANE SCRIPTEM NA VYPOCET RYCHLOSTI ***   
+    public float _speed; // _speed = výsledek metody pro výpoèet rychlosti - volany v jinem scriptu
+    public float UpdateDelay; // promìnná pro zpoždìní aktualizace rychlosti
+    // *** PROMENNE DEFINOVANE SCRIPTEM NA VYPOCET RYCHLOSTI ***
+
     Rigidbody _rb;
     float _steer;
     
@@ -29,8 +35,36 @@ public class Movement : MonoBehaviour
     void Start()
     {
         _rb= GetComponent<Rigidbody>();
-    
+        StartCoroutine(SpeedReckoner());// metoda pro výpoèet _speed
     }
+
+    // metoda na výpoèet _speed
+    private IEnumerator SpeedReckoner()
+    {
+
+        YieldInstruction timedWait = new WaitForSeconds(UpdateDelay);
+        Vector3 lastPosition = transform.position;
+        float lastTimestamp = Time.time;
+
+        while (enabled)
+        {
+            yield return timedWait;
+
+            var deltaPosition = (transform.position - lastPosition).magnitude;
+            var deltaTime = Time.time - lastTimestamp;
+
+            if (Mathf.Approximately(deltaPosition, 0f)) // Clean up "near-zero" displacement
+                deltaPosition = 0f;
+
+            _speed = deltaPosition / deltaTime;
+
+
+            lastPosition = transform.position;
+            lastTimestamp = Time.time;
+        }
+    }
+    // metoda na výpoèet _speed
+
 
     void ActivateSteerParticlesR()
     {
@@ -70,6 +104,9 @@ public class Movement : MonoBehaviour
         _particleR.Stop();
         _particleL.Stop();
     }
+
+
+
 
     // Update is called once per frame
     void Update()

@@ -1,86 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
+using System.Net.Sockets;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CameraTracking : MonoBehaviour
 {
+
     public Transform _rocket;
-    public Vector3 _cameraOffset;
-    private Vector3 _cameraOffMove;
-    public Vector3 _cameraOffsetZ;
-   
-    public float _zoomZ;
-    public float _speedZMultip;
+    public float _cameraZoom;
 
-    private Vector3 _currVel;
-
-
-    public float _speedZ;
+    private float _cameraZoomVectorZ; // hodnota Z vektoru pro _cameraZoomVectorZ
+    private Vector3 _cameraZoomVector; // plovoucí vector3 hodnota pricitana k offsetu
+    [SerializeField] Vector3 _cameraOffset; // preddefinovany offset pozice (vector3) camery
     public float _speed;
-    public float UpdateDelay;
-    public float _speedZoomLimit;
 
-
-  
-
+   
+    
     void Start()
     {
-        _speed= 0f;
-        _speedZMultip = 1;
-        _speedZ = 1f;
-        StartCoroutine(SpeedReckoner());
-
+        _cameraOffset = new Vector3(0, 4, -15);
+        _cameraZoom = 1;
+    
     }
-    // metoda na výpoèet SPEED
-    private IEnumerator SpeedReckoner()
-    {
-
-        YieldInstruction timedWait = new WaitForSeconds(UpdateDelay);
-        Vector3 lastPosition = transform.position;
-        float lastTimestamp = Time.time;
-
-        while (enabled)
-        {
-            yield return timedWait;
-
-            var deltaPosition = (transform.position - lastPosition).magnitude;
-            var deltaTime = Time.time - lastTimestamp;
-
-            if (Mathf.Approximately(deltaPosition, 0f)) // Clean up "near-zero" displacement
-                deltaPosition = 0f;
-
-            _speed = deltaPosition / deltaTime;
-
-
-            lastPosition = transform.position;
-            lastTimestamp = Time.time;
-        }
-    }
-
+   
     void Update()
     {
-        if (_speed > _speedZoomLimit) 
-        {
-            _speedZ = (17f - Mathf.Abs(_speed));
-        
-        }
 
 
 
 
+        _cameraZoomVectorZ = Mathf.Clamp(_cameraZoom, 0, 15);
+        _cameraZoomVector = new Vector3 (0, 0, _cameraZoomVectorZ);
+        transform.position = _rocket.position + _cameraOffset + _cameraZoomVector;
 
-        //_speedZ = (Mathf.Abs( _currVel.x)+ Mathf.Abs( _currVel.z)+ Mathf.Abs( _currVel.y)) * _speedZMultip;
-        _zoomZ = Mathf.Clamp(_speedZ, -7f, 17f);
-        _cameraOffsetZ = new Vector3(0, 0, 0);
-        //_cameraOffsetZ = new Vector3(0, 0, _zoomZ);
-        
-        _cameraOffMove = _cameraOffset - _cameraOffsetZ;
-        
-        transform.position = _rocket.position + _cameraOffMove;
-
-        //Debug.Log("rychlost _speedz" + _speedZ);
-        Debug.Log("rychlost speed" + _currVel);
+        Debug.Log("rychlost speed" + _speed);
     }
 }
