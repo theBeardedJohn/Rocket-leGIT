@@ -274,14 +274,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rocket: {fileID: 1075764783}
-  _cameraOffset: {x: 0.19, y: 6.2, z: 17.94}
-  _cameraOffsetZ: {x: 0, y: 0, z: 0}
-  _zoomZ: 0
-  _speedZMultip: 20
-  _speedZ: 0
+  _cameraZoom: 0
+  _cameraZoomSensitivity: 0
+  _cameraOffset: {x: 0, y: 0, z: 0}
+  _rocketEmpty: {fileID: 1075764782}
+  _localSpeed: 0
   _speed: 0
-  UpdateDelay: 0
-  _speedZoomLimit: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +567,8 @@ MonoBehaviour:
   _particle3: {fileID: 6434268378817776942}
   _particleR: {fileID: 1542783198}
   _particleL: {fileID: 1165899499}
+  _speed: 0
+  UpdateDelay: 0.57
   _thrustMultiplier: 1.42
   _steerSensitivity: 1.24
 --- !u!54 &1075764785
