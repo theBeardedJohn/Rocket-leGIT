@@ -19,6 +19,10 @@ public class Movement : MonoBehaviour
     public float _speed; // _speed = výsledek metody pro výpoèet rychlosti - volany v jinem scriptu
     public float UpdateDelay; // promìnná pro zpoždìní aktualizace rychlosti
     // *** PROMENNE DEFINOVANE SCRIPTEM NA VYPOCET RYCHLOSTI ***
+    public float angleZ;
+
+
+
 
     Rigidbody _rb;
     float _steer;
@@ -36,6 +40,7 @@ public class Movement : MonoBehaviour
     {
         _rb= GetComponent<Rigidbody>();
         StartCoroutine(SpeedReckoner());// metoda pro výpoèet _speed
+       
     }
 
     // metoda na výpoèet _speed
@@ -113,7 +118,7 @@ public class Movement : MonoBehaviour
     {
         _steer = Input.GetAxis("Horizontal");
         _thrust = Input.GetAxis("Vertical");
-
+        angleZ = transform.rotation.z;
 
         if (_thrust > 0)
         {
@@ -149,7 +154,7 @@ public class Movement : MonoBehaviour
       //  }
 
 
-        //Debug.Log(_thrust);
+        //Debug.Log(angleZ);
 
     }
 

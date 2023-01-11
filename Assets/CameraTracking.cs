@@ -23,7 +23,7 @@ public class CameraTracking : MonoBehaviour
     public float _localSpeed;
     public float _speed;
     //pristup k _speed z jineho scriptu
-
+    
 
 
 
@@ -63,7 +63,5 @@ public class CameraTracking : MonoBehaviour
         _cameraZoomVector = new Vector3 (0, 0, _cameraZoomVectorZ);
         transform.position = _rocket.position + _cameraOffset + _cameraZoomVector;
 
-        Debug.Log("rychlost speed" + _localSpeed);
-        Debug.Log("_cameraZoom" + _cameraZoom);
     }
 }
