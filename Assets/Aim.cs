@@ -7,81 +7,101 @@ using UnityEngine.Animations;
 public class Aim : MonoBehaviour
 {
 
-    public GameObject _rocketEmpty;
-    public Movement _movementScript;
 
-    
+
     float rotationZ;
-    float rocketRotationZ;
-    bool fixedAim;
    
-    [SerializeField] float aimSensitivity;
+    
 
+    bool fixedAim;
+    [SerializeField] float aimSensitivity;
+    [SerializeField] float fixedRotationZ;
 
 
     private void Start()
     {
-    fixedAim = false;
-    _movementScript = _rocketEmpty.GetComponent<Movement>();
+        fixedRotationZ = 1f;
+       
+    }
 
-
+    public void FixBool(bool sw)
+    {
+        fixedAim = sw;
 
     }
 
 
-
-
-
-    // Update is called once per frame
-
-   
-
-    void FixedUpdate()
+    // pøepínaè FixedAim true/false
+    void FixedAimChecker()
     {
-       rocketRotationZ = _movementScript.angleZ;
-
-
-        
-
-
+    
         if (Input.GetKey("p"))
         {
             fixedAim = !fixedAim;
+        }
 
-            
-        }  
+    }
 
-
-       if (fixedAim = true && Input.GetKey("j"))
+    void FixedAimOff()
+    {
+        if (Input.GetKey("j"))
         {
             rotationZ += aimSensitivity;
-            
+
         }
 
-        else if (fixedAim = true && Input.GetKey("l"))
+        else if (Input.GetKey("l"))
         {
             rotationZ -= aimSensitivity;
-            
-        }
-
-
-        if (fixedAim = false && Input.GetKey("j"))
-        {
-            rotationZ += aimSensitivity + (rocketRotationZ*100f);
-
-        }
-
-        else if (fixedAim = false && Input.GetKey("l"))
-        {
-            rotationZ -= aimSensitivity + (rocketRotationZ*100f);
 
         }
 
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
+    }
+    void FixedAimOn()
+    {
+        if (Input.GetKey("j"))
+        {
+            transform.Rotate(0f, 0f, +(fixedRotationZ * aimSensitivity));
+
+        }
+
+        else if (Input.GetKey("l"))
+        {
+            transform.Rotate(0f, 0f, -(fixedRotationZ * aimSensitivity));
+
+        }
+
+        
+    }
 
 
+    private void Update()
+    {
+       FixedAimChecker(); 
+    }
 
-       Debug.Log(rocketRotationZ);
+    void FixedUpdate()
+    {
+       
+
+        
+
+        if (fixedAim == true)
+        {
+            FixedAimOn();
+        }
+
+        else if (fixedAim == false)
+        {
+            FixedAimOff();
+
+        }
+
+
+        
+
+      
         Debug.Log(fixedAim);
 
 
