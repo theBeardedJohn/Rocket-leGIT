@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     // *** PROMENNE DEFINOVANE SCRIPTEM NA VYPOCET RYCHLOSTI ***
     public float angleZ;
 
-
+    public static Vector3 velocityStat;
 
 
     Rigidbody _rb;
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
     {
         _rb= GetComponent<Rigidbody>();
         StartCoroutine(SpeedReckoner());// metoda pro výpoèet _speed
-       
+        
     }
 
     // metoda na výpoèet _speed
@@ -116,6 +116,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocityStat = _rb.velocity;
         _steer = Input.GetAxis("Horizontal");
         _thrust = Input.GetAxis("Vertical");
         angleZ = transform.rotation.z;
@@ -154,7 +155,7 @@ public class Movement : MonoBehaviour
       //  }
 
 
-        //Debug.Log(angleZ);
+       
 
     }
 

@@ -102,7 +102,7 @@ public class Aim : MonoBehaviour
         
 
       
-        Debug.Log(fixedAim);
+       
 
 
 
